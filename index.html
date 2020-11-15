@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="style.css" rel="stylesheet">
     <script src="canvas.js"></script>
 </head>
 <body>
-<p>hi</p>
-<button onclick="sayHi()">c</button>
-
-<div id="container" class="center" ></div>
-<div id="scrollbar" class="scrollbar"></div>
+<div id="container"  ></div>
 <script>
 
     let chart = new Chart(
@@ -32,41 +27,7 @@
         size = [500,500],
         showAxisValues = true,
     );
-  /*  chart.data={
-        lineCharts :{
-            one: [[90, 130],[95, 25],[150, 80],[205, 25],[210, 130],[500,460]]б
-            [[0,0],[1,1],[3,3],[5,5],[7, 7],[10,10]],
-            },
-        container : "container",
-        width : 400,
-        height : 500,
-    }*/
 
-
-
-
-   // chart.sayHi();
 </script>
-<!--
-anychart.onDocumentLoad(function () {
-// create an instance of a pie chart
-var chart = anychart.pie();
-// set the data
-chart.data([
-["Chocolate", 5],
-["Rhubarb compote", 2],
-["Crêpe Suzette", 2],
-["American blueberry", 2],
-["Buttermilk", 1]
-]);
-// set chart title
-chart.title("Top 5 pancake fillings");
-// set the container element
-chart.container("container");
-// initiate chart display
-chart.draw();
-});
-&lt;!&ndash;<canvas id="myCanvas" width="600px" height="600px"> </canvas>&ndash;&gt;
-let binance = new Binance(data, 5);-->
 </body>
 </html>
