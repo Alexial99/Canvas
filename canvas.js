@@ -47,8 +47,8 @@ class Chart {
         this.coordinates = coordinates;
         this.colorLine = colorLine;
         this.id = id;
-        this.width = size[0];
-        this.height = size[1];
+        this.width = size;
+        this.height = size;
         this.showAxisValues = showAxisValues;
         self = this;
         this.createCanvas();
