@@ -16,12 +16,16 @@ const css = `#myCanvas{ background:blue}
     border-style:none ;
 }
 .scrollbar{
+
     height:20px;
     align-content:center;
 }
 
 /* Track */
 .scrollbar-track {
+position:absolute;
+    display: flex;
+    align-items: center;
     box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
 }
@@ -71,6 +75,12 @@ class Chart {
         scrollDiv.id = 'scrollbar';
         scrollDiv.classList.add('scrollbar');
         element.append(scrollDiv);
+
+        window.addEventListener('scroll', (e)=>{
+            let canvasT = canvas.getBoundingClientRect().top;
+            let canvasL = canvas.getBoundingClientRect().left;
+            canvas.thisParam[1] = [canvasT, canvasL];
+        })
     }
 
     scalingCanvas() {
@@ -239,9 +249,12 @@ class Chart {
     rotateCanvas(canvas) {
         let canvasT = canvas.getBoundingClientRect().top;
         let canvasL = canvas.getBoundingClientRect().left;
-
         canvas.style.transform = 'rotate(-90deg)';
         return [canvasT, canvasL];
+    }
+
+    scrollHandler(){
+
     }
 
     lineDrawing(arr, canvas, elementInitialCoordinates, ctx, color, scaling, scalingWheel, scale) {
@@ -266,7 +279,7 @@ class Chart {
 
     createScrollbar(width, thumbWidth, left, thisData) {
         let element = document.getElementById("scrollbar");
-        element.innerHTML = " <div id='track" + self.id[0].toUpperCase() + self.id.slice(1) + "' class='scrollbar-track' style='width:" + width + "px; left:" + (left + 36) + "px;position: fixed;'><button id='scrollButton' class='scrollbar-thumb' style='width:" + thumbWidth + "px;position: relative;left=1px'></button></div>";
+        element.innerHTML = " <div id='track" + self.id[0].toUpperCase() + self.id.slice(1) + "' class='scrollbar-track' style='width:" + width + "px; left:" + (left + 36) + "px;'><button id='scrollButton' class='scrollbar-thumb' style='width:" + thumbWidth + "px;position: relative;left=1px'></button></div>";
         let scrollButton = document.getElementById("scrollButton");
         scrollButton.thisParam = [thisData];
         scrollButton.onmousedown = this.moveButton;
@@ -422,7 +435,7 @@ class Chart {
                         point.onmouseout = deleteFunc;
 
                         function deleteFunc() {
-                            setTimeout(() => span.remove(), 1000);
+                            setTimeout(() => span.remove(), 500);
                             point.remove();
                         }
                     }
