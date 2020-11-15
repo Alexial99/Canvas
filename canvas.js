@@ -215,9 +215,9 @@ class Chart {
                 } else {
                     ctx.moveTo(32, axisCoordinate + 35);
                     ctx.lineTo(40, axisCoordinate + 35);
-
+                    point.push(Math.round(axisCoordinate / scaling[0] / scalingWheel));
                     if ((showAxisValues)) {
-                        point.push(Math.round(axisCoordinate / scaling[0] / scalingWheel));
+
                         ctx.rotate(90 * Math.PI / 180);
                         ctx.fillText(
                             String(Math.round((axisCoordinate / scaling[0] / scalingWheel) + k / scaling[0] / scalingWheel)),
@@ -311,8 +311,8 @@ class Chart {
             let thisData = e.target.thisParam[0];
             let scaling = thisData[3], canvas = thisData[0], elementInitialCoordinates = thisData[2];
             let scale = thisData[4], ctx = thisData[1], maxNumberOfArr = scaling[3];
-
-            let k = maxNumberOfArr[0] * scaling[1] / 100 * e.target.thisParam[1];
+            let scalingWheel=canvas.thisParam[3];
+            let k = maxNumberOfArr[0] * scaling[0]*scalingWheel / 100 * e.target.thisParam[1];
             scaling[7] = k;
             ctx.clearRect(0, 0, maxNumberOfArr[1] * scaling[1] + 100, maxNumberOfArr[0] * scaling[0] * scale + 100);
             let rectSize = self.axisDrawing(ctx, canvas, scaling, scale, k);
