@@ -147,7 +147,6 @@ class Chart {
                 if ((String(x).slice(String(x).indexOf('.') + 1, String(x).indexOf('.') + 2)) < 5) {
                     x = Number(Math.trunc(x) + "." + 5);
                 } else {
-                    // x = Math.ceil(x);
                     x = Number(x.toFixed(1));
                 }
                 return x;
@@ -217,7 +216,7 @@ class Chart {
                     ctx.moveTo(32, axisCoordinate + 35);
                     ctx.lineTo(40, axisCoordinate + 35);
 
-                    if ((showAxisValues)) { //&&(i!=number)
+                    if ((showAxisValues)) {
                         point.push(Math.round(axisCoordinate / scaling[0] / scalingWheel));
                         ctx.rotate(90 * Math.PI / 180);
                         ctx.fillText(
@@ -266,7 +265,6 @@ class Chart {
     }
 
     createScrollbar(width, thumbWidth, left, thisData) {
-        console.log("hi");
         let element = document.getElementById("scrollbar");
         element.innerHTML = " <div id='track" + self.id[0].toUpperCase() + self.id.slice(1) + "' class='scrollbar-track' style='width:" + width + "px; left:" + (left + 36) + "px;position: fixed;'><button id='scrollButton' class='scrollbar-thumb' style='width:" + thumbWidth + "px;position: relative;left=1px'></button></div>";
         let scrollButton = document.getElementById("scrollButton");
@@ -297,8 +295,6 @@ class Chart {
         itemCoords.left = itemClientCoords.left + pageXOffset;
         let right = slider.offsetWidth - item.offsetWidth;
         let shiftX = e.pageX - itemCoords.left;
-        console.log(e.pageX); //TODO
-        console.log(sliderCoords.left);
 
         function close() {
             e.target.onmousemove -= getCoordinateX;
@@ -311,16 +307,13 @@ class Chart {
             if (newLeft > right) newLeft = right;
             item.style.left = newLeft + 'px';
             e.target.thisParam[1] = Math.round(newLeft / right * 100); //процент прокрутки.
-            //console.log(e.target.thisParam[1]); //TODO
 
             let thisData = e.target.thisParam[0];
             let scaling = thisData[3], canvas = thisData[0], elementInitialCoordinates = thisData[2];
             let scale = thisData[4], ctx = thisData[1], maxNumberOfArr = scaling[3];
 
-            //ctx.clearRect(0, 0, canvas.height, canvas.width);
             let k = maxNumberOfArr[0] * scaling[1] / 100 * e.target.thisParam[1];
             scaling[7] = k;
-            //console.log(maxNumberOfArr[0] * scaling[0] / 100 * e.target.thisParam[1]);
             ctx.clearRect(0, 0, maxNumberOfArr[1] * scaling[1] + 100, maxNumberOfArr[0] * scaling[0] * scale + 100);
             let rectSize = self.axisDrawing(ctx, canvas, scaling, scale, k);
             ctx.save();
@@ -383,7 +376,6 @@ class Chart {
 
             self.createScrollbar(scaling[4], widthThumb, elementInitialCoordinates[1], [canvas, ctx, elementInitialCoordinates, scaling, scale]);
             e.preventDefault ? e.preventDefault() : (e.returnValue = false);
-            //console.log("widthThumb: " + widthThumb) //TODO
         }
 
     }
